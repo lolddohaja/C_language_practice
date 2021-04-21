@@ -21,9 +21,6 @@ void invertf(char *src, int width, int height);
 int main()
 {
     int n;
-    //ë¬¸ì?—´ ?–´? ˆ?´ë¡? ?‘œ?˜„ ê°??Š¥
-    //êµ¬ì¡°ì²´ë¡œ ë§Œë“¤?–´?„œ ?‘œ?˜„ ê°??Š¥ êµ¬ì¡°ì²? ?•ˆ?—?„œ width, height, imgë¥? ë§Œë“¤ ?ˆ˜ ?ˆ?‹¤
-    //?´ë¯¸ì??ë¥? ì´ˆê¸°?™” ?•˜?Š” ?•¨?ˆ˜
     char origin[HEIGHT][WIDTH] = {
         "---*----",
         "---*----",
@@ -35,6 +32,9 @@ int main()
     my_image.img = origin;
     my_image.width = WIDTH;
     my_image.height = HEIGHT;
+
+    printf("\n¿øº» \n");
+    printScreen((char *)my_image.img, my_image.width, my_image.height);
 
     while (1)
     {
@@ -50,35 +50,35 @@ int main()
         {
         //ÁÂ¿ì ¹İÀü
         case 1:
-            printf("\nÁÂ¿ì ¹İÀü \n");
+            printf("ÁÂ¿ì ¹İÀü \n");
             flipH(my_image.img, my_image.width, my_image.height);
             break;
 
         //»óÇÏ ¹İÀü
         case 2:
-            printf("\n»óÇÏ ¹İÀü \n");
+            printf("»óÇÏ ¹İÀü \n");
             flipV(my_image.img, my_image.width, my_image.height);
             break;
 
         //90µµ µ¹¸®±â
         case 3:
-            printf("\n90µµ µ¹¸®±â \n");
+            printf("90µµ µ¹¸®±â \n");
             rotate9(my_image.img, my_image.width, my_image.height);
             break;
 
         //180?„ ?Œë¦¬ê¸°
         case 4:
-            printf("\n180µµ µ¹¸®±â\n");
+            printf("180µµ µ¹¸®±â\n");
             rotate18(my_image.img,my_image.width, my_image.height);
             break;
         //270?„ ?Œë¦¬ê¸°
         case 5:
-            printf("\n270µµ µ¹¸®±â\n");
+            printf("270µµ µ¹¸®±â\n");
             rotate27(my_image.img, my_image.width, my_image.height);
             break;
         //?¸ë²„íŠ¸
         case 6:
-            printf("\nÀÎ¹öÆ® \n");
+            printf("ÀÎ¹öÆ® \n");
             invertf(my_image.img, my_image.width,my_image.height);
             break;
         default:
