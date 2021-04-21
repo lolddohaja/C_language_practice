@@ -1,10 +1,11 @@
 #include <stdio.h>
+
 #define WIDTH 7
 #define HEIGHT 6
 
-void printScreen(char arr[][WIDTH], int height);
-void printScreen2(char arr[][HEIGHT], int width);
-void flipH(char src[][WIDTH], char dest[][WIDTH], int height);
+void menu(void);
+void printScreen(char *arr_p, int width, int height);
+void flipH(char *src, char *dest, int width, int height);
 void flipV(char src[][WIDTH], char dest[][WIDTH], int height);
 void rotate9(char src[][WIDTH], char dest[][HEIGHT], int width);
 void rotate18(char src[][WIDTH], char dest[][WIDTH], int height);
@@ -14,7 +15,8 @@ void invertf(char src[][WIDTH], char dest[][WIDTH], int height);
 int main(void)
 {
     int  n;
-
+    //문자열 어레이로 표현 가능 
+    //구조체로 만들어서 표현 가능
     char origin[HEIGHT][WIDTH] = {
         {'-','-','-','*','-','-','-'},
         {'-','-','-','*','-','-','-'},
@@ -30,62 +32,54 @@ int main(void)
     char rotate_270[WIDTH][HEIGHT];
     char invert[HEIGHT][WIDTH];
 
-
-
     while(1){
-        printf("1.플립H, 2.플립V, 3.90도돌려, 4.180도돌려, 5.270도 돌려, 6.인버트 (0.종료): ");
+        menu();
+        printf("선택하세요:");
         scanf("%d",&n);
         if(n==0) break;
-
         //print origin
         printf("\nOriginal \n");
-        printScreen(origin, HEIGHT);
-
-
+        printScreen((char *)origin, WIDTH, HEIGHT);
         switch (n)
         {
         //flipH
-        case 1:{
-           
-            flipH(origin, flip_h, HEIGHT);
-            printScreen(flip_h, HEIGHT);
-        }
-        break;
+        case 1:
+            flipH(origin, flip_h, WIDTH,HEIGHT);
+            printScreen((char *)flip_h, WIDTH, HEIGHT);
+            printf("\nflip_h \n");
+            break;
         //flipV
-        case 2:{
+        case 2:
             flipV(origin, flip_v, HEIGHT);
-            printScreen(flip_v, HEIGHT);
-     
-        }
-        break;
+            printScreen((char *)flip_v, WIDTH, HEIGHT);
+            printf("\nflip_v \n");
+            break;
         //90도 돌리기
-        case 3:{
+        case 3:
             rotate9(origin, rotate_90, HEIGHT);
-            printScreen2(rotate_90, WIDTH);
-        }
-        break;
+            printScreen((char *)rotate_90, HEIGHT, WIDTH);
+            printf("\n90도 돌리기 \n");
+            break;
         //180도 돌리기
-        case 4:{
+        case 4:
             rotate18(origin, rotate_180, HEIGHT);
-            printScreen(rotate_180, HEIGHT);
-        }
-        break;
+            printScreen((char *)rotate_180, WIDTH, HEIGHT);
+            printf("\nrotate 180\n");
+            break;
         //270도 돌리기
-        case 5:{
+        case 5:
             rotate27(origin, rotate_270, HEIGHT);
-            printScreen2(rotate_270, HEIGHT);
-        }
-        break;
+            printScreen((char *)rotate_270, HEIGHT, WIDTH);
+            printf("\nrotate 270\n");
+            break;
         //인버트
-        case 6:{
+        case 6:
             invertf(origin, invert, HEIGHT);
-            printScreen(invert, HEIGHT);
-        }
-        break;
+            printScreen((char *)invert, WIDTH, HEIGHT);
+            printf("\n인버트 \n");
+            break;
         default: break;
         }
-
-
     }
     // move x, y
     // zoom
@@ -93,31 +87,29 @@ int main(void)
     return 0;
 }
 
-void printScreen(char arr[][WIDTH], int height){
+void menu(void){
+    printf("-------골라보세요-------");
+    printf("       1번 플립H        ");
+    printf("       2번 플립V        ");
+    printf("      3번 90도돌려      ");
+    printf("      4번 180도돌려     ");
+    printf("      5번 270도돌려     ");
+    printf("       6번 인버트       ");
+    printf("       (0번 종료)       ");
+}
+
+void printScreen(char *arr_p, int width, int height){
     for(int y = 0; y < height; y++)
     {
-        for(int x = 0; x < WIDTH; x++)
+        for(int x = 0; x < width; x++)
         {
-            printf("%c", arr[y][x]);
+            printf("%c", *(arr_p + (y*width) + x) );
         }
         printf("\n");
     }
 }
 
-void printScreen2(char arr[][HEIGHT], int width){
-    for(int i = 0; i < WIDTH; i++)
-    {
-        for(int j = 0; j < HEIGHT; j++)
-        {
-            printf("%c", arr[i][j]);
-        }
-
-
-        printf("\n");
-    }
-}
-
-void flipH(char src[][WIDTH], char dest[][WIDTH], int height){
+void flipH(char *src, char *dest, int width, int height){
     for (int y = 0; y < HEIGHT; y++)
     {
         for(int x = 0; x < WIDTH; x++)
@@ -125,7 +117,7 @@ void flipH(char src[][WIDTH], char dest[][WIDTH], int height){
             dest[y][x] = src[y][(WIDTH-1)-x];
         }
     }
-    printf("\nflip_h \n");
+    
 }
 
 void flipV(char src[][WIDTH], char dest[][WIDTH], int height){
@@ -136,7 +128,7 @@ void flipV(char src[][WIDTH], char dest[][WIDTH], int height){
             dest[y][x] = src[(HEIGHT-1)-y][x];
         }
     }
-    printf("\nflip_h \n");
+    
 }
 
 void rotate9(char src[][WIDTH], char dest[][HEIGHT], int width){
@@ -148,7 +140,7 @@ void rotate9(char src[][WIDTH], char dest[][HEIGHT], int width){
             dest[j][HEIGHT-1-i] = src[i][j];
         }
     }
-    printf("\n90도 돌리기 \n");
+    
 }
 
 void rotate18(char src[][WIDTH], char dest[][WIDTH], int height){
@@ -159,7 +151,7 @@ void rotate18(char src[][WIDTH], char dest[][WIDTH], int height){
             dest[i][j] = src[HEIGHT-1-i][WIDTH-1-j];
         }
     }
-    printf("\nrotate 180\n");
+    
 }
 
 void rotate27(char src[][WIDTH], char dest[][HEIGHT], int width){
@@ -170,7 +162,7 @@ void rotate27(char src[][WIDTH], char dest[][HEIGHT], int width){
             dest[WIDTH-1-j][i] = src[i][j];
         }
     }
-    printf("\nrotate 270\n");
+    
 }
 
 void invertf(char src[][WIDTH], char dest[][WIDTH], int height){
@@ -186,5 +178,4 @@ void invertf(char src[][WIDTH], char dest[][WIDTH], int height){
             }
         }
     }
-    printf("\n인버트 \n");
 }
