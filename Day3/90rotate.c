@@ -51,17 +51,16 @@ void rotate9(char *src, int width, int height)
     char rotate_90[width][height];
     if (width > height)
     {
-        for (int y = 0; y < width; y++)
+        for (int y = 0 ; y < width; y++ )
         {
-            for (int x = 0; x < height ; x++)
+            for (int x = 0; x <height ; x++)
             {
                 //printf("%d",x);
                 //dest[x][HEIGHT - 1 - y] = src[y][x];
-                *(*rotate_90 + (x * height) +  (height-1-y)) = *(src + (y * height) + x);
-                
+                *(*rotate_90 + (x * width) +  width-1-y) = *(src + (y * height) + x);
             }
         }
-        printScreen((char *)rotate_90, height , width);
+        printScreen((char *)rotate_90, width-(width-height) , height);
     }
     
     // else if(height > width)
