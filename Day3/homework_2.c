@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define WIDTH 7
+#define WIDTH 8
 #define HEIGHT 6
 
 struct imgSt{
@@ -18,26 +18,31 @@ void rotate18(char *src, char *dest, int width, int height);
 void rotate27(char *src, char *dest, int width, int height);
 void invertf(char *src, char *dest, int width, int height);
 
-int main(void)
+int main()
 {
     int n;
     //문자열 어레이로 표현 가능
     //구조체로 만들어서 표현 가능 구조체 안에서 width, height, img를 만들 수 있다
     //이미지를 초기화 하는 함수
     char origin[HEIGHT][WIDTH] = {
-        "---*---",
-        "---*---",
-        "--***--",
-        "-*-***-",
-        "*--****",
-        "*--****"};
-
+        "---*----",
+        "---*----",
+        "--***---",
+        "-*-***--",
+        "*--****-",
+        "*--****-"};
     char flip_h[HEIGHT][WIDTH];
     char flip_v[HEIGHT][WIDTH];
     char rotate_90[WIDTH][HEIGHT];
     char rotate_180[HEIGHT][WIDTH];
     char rotate_270[WIDTH][HEIGHT];
     char invert[HEIGHT][WIDTH];
+
+    struct imgSt my_image;
+    my_image.img = origin;
+    my_image.width = WIDTH;
+    my_image.height = HEIGHT;
+
 
     while (1)
     {
@@ -47,45 +52,45 @@ int main(void)
         if (n == 0)
             break;
         printf("\n원본 \n");
-        printScreen((char *)origin, WIDTH, HEIGHT);
+        printScreen((char *)my_image.img, my_image.width, my_image.height);
 
         switch (n)
         {
         //좌우반전
         case 1:
             printf("\n좌우반전 \n");
-            flipH(origin, flip_h, WIDTH, HEIGHT);
-            printScreen((char *)flip_h, WIDTH, HEIGHT);
+            flipH(my_image.img, flip_h, my_image.width, my_image.height);
+            printScreen((char *)flip_h, my_image.width, my_image.height);
             break;
         //상하반전
         case 2:
             printf("\n상하반전 \n");
-            flipV(origin, flip_v, WIDTH, HEIGHT);
-            printScreen((char *)flip_v, WIDTH, HEIGHT);
+            flipV(my_image.img, flip_v, my_image.width, my_image.height);
+            printScreen((char *)flip_v,  my_image.width, my_image.height);
             break;
         //90도 돌리기
         case 3:
             printf("\n90도 돌리기 \n");
-            rotate9(origin, rotate_90, WIDTH, HEIGHT);
-            printScreen((char *)rotate_90, HEIGHT, WIDTH);
+            rotate9(my_image.img, rotate_90, my_image.width, my_image.height);
+            printScreen((char *)rotate_90, my_image.height, my_image.width);
             break;
         //180도 돌리기
         case 4:
             printf("\n180도 돌리기\n");
-            rotate18(origin, rotate_180, WIDTH, HEIGHT);
-            printScreen((char *)rotate_180, WIDTH, HEIGHT);
+            rotate18(my_image.img, rotate_180, my_image.width, my_image.height);
+            printScreen((char *)rotate_180, my_image.width, my_image.height);
             break;
         //270도 돌리기
         case 5:
             printf("\n270도 돌리기\n");
-            rotate27(origin, rotate_270, WIDTH, HEIGHT);
-            printScreen((char *)rotate_270, HEIGHT, WIDTH);
+            rotate27(my_image.img, rotate_270, my_image.width, my_image.height);
+            printScreen((char *)rotate_270, my_image.height, my_image.width);
             break;
         //인버트
         case 6:
             printf("\n인버트 \n");
-            invertf(origin, invert, HEIGHT, WIDTH);
-            printScreen((char *)invert, WIDTH, HEIGHT);
+            invertf(my_image.img, invert, my_image.height, my_image.width);
+            printScreen((char *)invert, my_image.width, my_image.height);
             break;
         default:
             break;
@@ -144,9 +149,9 @@ void flipV(char *src, char *dest, int width, int height)
 void rotate9(char *src, char *dest, int width, int height)
 {
 
-    for (int y = 0; y < height; y++)
+    for (int y = 0; y < width; y++)
     {
-        for (int x = 0; x < width - (width - height); x++)
+        for (int x = 0; x < height - (width - height); x++)
         {
             *(dest + (x * height) + (width - 2 - y)) = *(src + (y * width) + x);
         }
