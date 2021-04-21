@@ -31,7 +31,7 @@ int main(void)
 
     while (1)
     {
-        printf("1.í”Œë¦½H, 2.í”Œë¦½V, 3.90ë„ëŒë ¤, 4.180ë„ëŒë ¤, 5.270ë„ ëŒë ¤, 6.ì¸ë²„íŠ¸ (0.ì¢…ë£Œ): ");
+        printf("1.?”Œë¦½H, 2.?”Œë¦½V, 3.90?„?Œ? ¤, 4.180?„?Œ? ¤, 5.270?„ ?Œ? ¤, 6.?¸ë²„íŠ¸ (0.ì¢…ë£Œ): ");
         scanf("%d", &n);
         if (n == 0)
             break;
@@ -57,28 +57,28 @@ int main(void)
             printScreen(flip_v, HEIGHT);
         }
         break;
-        //90ë„ ëŒë¦¬ê¸°
+        //90?„ ?Œë¦¬ê¸°
         case 3:
         {
             rotate9(origin, rotate_90, HEIGHT);
             printScreen2(rotate_90, WIDTH);
         }
         break;
-        //180ë„ ëŒë¦¬ê¸°
+        //180?„ ?Œë¦¬ê¸°
         case 4:
         {
             rotate18(origin, rotate_180, HEIGHT);
             printScreen(rotate_180, HEIGHT);
         }
         break;
-        //270ë„ ëŒë¦¬ê¸°
+        //270?„ ?Œë¦¬ê¸°
         case 5:
         {
             rotate27(origin, rotate_270, HEIGHT);
             printScreen2(rotate_270, HEIGHT);
         }
         break;
-        //ì¸ë²„íŠ¸
+        //?¸ë²„íŠ¸
         case 6:
         {
             invertf(origin, invert, HEIGHT);
@@ -154,7 +154,7 @@ void rotate9(char src[][WIDTH], char dest[][HEIGHT], int width)
             dest[x][HEIGHT - 1 - y] = src[y][x];
         }
     }
-    printf("\n90ë„ ëŒë¦¬ê¸° \n");
+    printf("\n90?„ ?Œë¦¬ê¸° \n");
 }
 
 void rotate18(char src[][WIDTH], char dest[][WIDTH], int height)
@@ -198,5 +198,5 @@ void invertf(char src[][WIDTH], char dest[][WIDTH], int height)
             }
         }
     }
-    printf("\nì¸ë²„íŠ¸ \n");
+    printf("\n?¸ë²„íŠ¸ \n");
 }

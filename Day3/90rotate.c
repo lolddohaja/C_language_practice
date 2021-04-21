@@ -3,7 +3,7 @@
 #define WIDTH 8
 #define HEIGHT 6
 
-void rotate9(char *src, char *dest, int width, int height);
+void rotate9(char *src, int width, int height);
 void printScreen(char *arr_p, int width, int height);
 
 struct imgSt
@@ -27,10 +27,10 @@ int main()
     my_image.width = WIDTH;
     my_image.height = HEIGHT;
     printScreen((char *)my_image.img, my_image.width, my_image.height);
-    printf("90ë„ ëŒë¦¬ê¸° \n");
-    char rotate_90[WIDTH][HEIGHT];
-    rotate9(my_image.img, rotate_90, my_image.width, my_image.height);
-    printScreen((char *)rotate_90, my_image.height, my_image.width);
+    printf("90µµ È¸ÀüÇÏ±â \n");
+    
+    rotate9(my_image.img, my_image.width, my_image.height);
+    
 }
 
 void printScreen(char *arr_p, int width, int height)
@@ -46,19 +46,24 @@ void printScreen(char *arr_p, int width, int height)
     printf("\n");
 }
 
-void rotate9(char *src, char *dest, int width, int height)
+void rotate9(char *src, int width, int height)
 {
+    char rotate_90[width][height];
     if (width > height)
     {
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < width; y++)
         {
-            for (int x = 0; x < width - (width - height); x++)
+            for (int x = 0; x < height ; x++)
             {
+                //printf("%d",x);
                 //dest[x][HEIGHT - 1 - y] = src[y][x];
-                *(dest + (x * width) + (width-(width - height) - y)) = *(src + (y * width) + x);
+                *(*rotate_90 + (x * height) +  (height-1-y)) = *(src + (y * height) + x);
+                
             }
         }
+        printScreen((char *)rotate_90, height , width);
     }
+    
     // else if(height > width)
     // {
     //     for (int y = 0; y < height; y++)
