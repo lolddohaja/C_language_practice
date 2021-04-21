@@ -56,7 +56,7 @@ int main()
 
         switch (n)
         {
-        //醫뚯슦諛섏쟾
+        //왜 한글 안올라가냐 화나게
         case 1:
             printf("\n좌우 반전 \n");
             flipH(my_image.img, flip_h, my_image.width, my_image.height);
