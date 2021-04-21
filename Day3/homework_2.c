@@ -62,13 +62,13 @@ int main()
             flipH(my_image.img, flip_h, my_image.width, my_image.height);
             printScreen((char *)flip_h, my_image.width, my_image.height);
             break;
-        //?긽?븯諛섏쟾
+        //이제 한글 올라가겠지?
         case 2:
             printf("\n상하 반전 \n");
             flipV(my_image.img, flip_v, my_image.width, my_image.height);
             printScreen((char *)flip_v,  my_image.width, my_image.height);
             break;
-        //90?룄 ?룎由ш린
+        //90제발 올라가라
         case 3:
             printf("\n90도 돌리기 \n");
             rotate9(my_image.img, rotate_90, my_image.width, my_image.height);
