@@ -45,11 +45,11 @@ void init_map(char map[M_HEIGHT][M_WIDTH]);
 
 int get_dx(char ch)
 {
-    if (ch == 'l')
+    if (ch == 'd')
     {
         return 1;
     }
-    else if (ch == 'h')
+    else if (ch == 'a')
     {
         return -1;
     }
@@ -57,11 +57,11 @@ int get_dx(char ch)
 }
 int get_dy(char ch)
 {
-    if (ch == 'j')
+    if (ch == 's')
     {
         return 1;
     }
-    else if (ch == 'k')
+    else if (ch == 'w')
     {
         return -1;
     }
@@ -92,7 +92,6 @@ int main()
 
         if (ch)
         {
-
             map[y1][x1] = ' ';
 
             if (ch == 'q')
