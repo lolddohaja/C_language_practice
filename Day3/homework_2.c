@@ -1,9 +1,10 @@
 #include <stdio.h>
 
-#define WIDTH 8
+#define WIDTH 7
 #define HEIGHT 6
 
-struct imgSt{
+struct imgSt
+{
     char *img;
     int width;
     int height;
@@ -11,75 +12,101 @@ struct imgSt{
 
 void menu();
 void printScreen(char *arr_p, int width, int height);
-void flipH(char *src, int width, int height);
-void flipV(char *src, int width, int height);
-void rotate9(char *src, int width, int height);
-void rotate18(char *src, int width, int height);
-void rotate27(char *src, int width, int height);
-void invertf(char *src, int width, int height);
+void flipH(char *src, char *dest, int width, int height);
+void flipV(char *src, char *dest, int width, int height);
+void rotate9(char *src, char *dest, int width, int height);
+void rotate18(char *src, char *dest, int width, int height);
+void rotate27(char *src, char *dest, int width, int height);
+void invertf(char *src, char *dest, int width, int height);
 
 int main()
 {
-    int n;
     char origin[HEIGHT][WIDTH] = {
-        "---*----",
-        "---*----",
-        "--***---",
-        "-*-***--",
-        "*--****-",
-        "*--****-"};
+        "---*---",
+        "---*---",
+        "--***--",
+        "-*-***-",
+        "*--***-",
+        "*--***-"};
+
     struct imgSt my_image;
     my_image.img = origin;
+
     my_image.width = WIDTH;
     my_image.height = HEIGHT;
 
-    printf("\n¿øº» \n");
+    int n;
+
+    char flip_h[HEIGHT][WIDTH];
+    char flip_v[HEIGHT][WIDTH];
+    char rotate_90[HEIGHT][WIDTH];
+    char rotate_180[HEIGHT][WIDTH];
+    char rotate_270[HEIGHT][WIDTH];
+    char invert[HEIGHT][WIDTH];
+
+    printf("\nì›ë³¸ \n");
     printScreen((char *)my_image.img, my_image.width, my_image.height);
 
     while (1)
     {
         menu();
-        printf("¼±ÅÃÇÏ¼¼¿ä:");
+        printf("ì„ íƒí•˜ì„¸ìš”:");
         scanf("%d", &n);
         if (n == 0)
             break;
-        printf("\n¿øº» \n");
+        printf("\nì›ë³¸\n");
         printScreen((char *)my_image.img, my_image.width, my_image.height);
 
         switch (n)
         {
-        //ÁÂ¿ì ¹İÀü
+        //ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         case 1:
-            printf("ÁÂ¿ì ¹İÀü \n");
-            flipH(my_image.img, my_image.width, my_image.height);
+            printf("ì¢Œìš° ë°˜ì „ \n");
+            flipH(my_image.img,flip_h, my_image.width, my_image.height);
+            printScreen((char *)flip_h, my_image.width, my_image.height);
             break;
 
-        //»óÇÏ ¹İÀü
+        //ìƒí•˜ ë°˜ì „
         case 2:
-            printf("»óÇÏ ¹İÀü \n");
-            flipV(my_image.img, my_image.width, my_image.height);
+            printf("ìƒí•˜ ë°˜ì „ \n");
+            flipV(my_image.img,flip_v, my_image.width, my_image.height);
+            printScreen((char *)flip_v, my_image.width, my_image.height);
             break;
 
-        //90µµ µ¹¸®±â
+        //90ë„ ëŒë¦¬ê¸°
         case 3:
-            printf("90µµ µ¹¸®±â \n");
-            rotate9(my_image.img, my_image.width, my_image.height);
-            break;
+        {
+            printf("90ë„ ëŒë¦¬ê¸° \n");
+            rotate9(my_image.img, rotate_90, my_image.width, my_image.height);
+            if (my_image.width > my_image.height)
+            {
+                printScreen((char *)rotate_90, my_image.width - (my_image.width - my_image.height), my_image.height);
+            }
+            else
+            {
+                printScreen((char *)rotate_90, my_image.width, my_image.height - (my_image.height - my_image.width));
+            }
 
-        //180?„ ?Œë¦¬ê¸°
+            break;
+        }
+        //180ë„ ëŒë¦¬ê¸°
         case 4:
-            printf("180µµ µ¹¸®±â\n");
-            rotate18(my_image.img,my_image.width, my_image.height);
+            printf("180ë„ ëŒë¦¬ê¸°\n");
+            rotate18(my_image.img,rotate_180, my_image.width, my_image.height);
+            printScreen((char *)rotate_180, my_image.width, my_image.height);
             break;
-        //270?„ ?Œë¦¬ê¸°
+        //270ë„ ëŒë¦¬ê¸°
         case 5:
-            printf("270µµ µ¹¸®±â\n");
-            rotate27(my_image.img, my_image.width, my_image.height);
+            printf("270ë„ ëŒë¦¬ê¸°\n");
+            rotate27(my_image.img,rotate_270, my_image.width, my_image.height);
+            printScreen((char *)rotate_270, my_image.width - (my_image.width - my_image.height), my_image.height);
+            printScreen((char *)rotate_270, my_image.width, my_image.height - (my_image.height - my_image.width));
             break;
-        //?¸ë²„íŠ¸
+        //ì¸ë²„íŠ¸
         case 6:
-            printf("ÀÎ¹öÆ® \n");
-            invertf(my_image.img, my_image.width,my_image.height);
+            printf("ì¸ë²„íŠ¸\n");
+            invertf(my_image.img,invert, my_image.width, my_image.height);
+            printScreen((char *)invert, my_image.width, my_image.height);
             break;
         default:
             break;
@@ -90,14 +117,14 @@ int main()
 
 void menu()
 {
-    printf("--------°ñ¶óº¸¼¼¿ä--------\n");
-    printf("       1¹ø ÁÂ¿ì ¹İÀü        \n");
-    printf("       2¹ø »óÇÏ ¹İÀü        \n");
-    printf("       3¹ø 90µµ µ¹¸®±â      \n");
-    printf("      4¹ø 180µµ µ¹¸®±â      \n");
-    printf("      5¹ø 270µµ µ¹¸®±â      \n");
-    printf("         6¹ø ÀÎ¹öÆ®         \n");
-    printf("         (0¹ø Á¾·á)        \n");
+    printf("-------ê³¨ë¼ë³´ì„¸ìš”------\n");
+    printf("      1ë²ˆ ì¢Œìš° ë°˜ì „     \n");
+    printf("      2ë²ˆ ìƒí•˜ ë°˜ì „      \n");
+    printf("      3ë²ˆ 90ë„ ëŒë¦¬ê¸°    \n");
+    printf("     4ë²ˆ 180ë„ ëŒë¦¬ê¸°     \n");
+    printf("      5ë²ˆ 270ë„ ëŒë¦¬ê¸°      \n");
+    printf("         6ë²ˆ ì¸ë²„íŠ¸        \n");
+    printf("         (0ë²ˆ ì¢…ë£Œ)        \n");
 }
 
 void printScreen(char *arr_p, int width, int height)
@@ -113,111 +140,102 @@ void printScreen(char *arr_p, int width, int height)
     printf("\n");
 }
 
-void flipH(char *src, int width, int height)
+void flipH(char *src, char *dest, int width, int height)
 {
-    char flip_h[height][width];
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
-            *(*flip_h + (y * width) + x) = *(src + (y * width) + (width - 1) - x);
+            *(dest + (y * width) + x) = *(src + (y * width) + (width - 1) - x);
         }
     }
-    printScreen((char *)flip_h, width, height);
 }
 
-void flipV(char *src, int width, int height)
+void flipV(char *src, char *dest, int width, int height)
 {
-    char flip_v[height][width];
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
-            *(*flip_v + (y * width) + x) = *(src + (((height - 1) - y) * width) + x);
+            *(dest + (y * width) + x) = *(src + (((height - 1) - y) * width) + x);
         }
     }
-    printScreen((char *)flip_v,  width, height);
 }
 
-void rotate9(char *src,int width, int height)
+void rotate9(char *src, char *dest, int width, int height)
 {
-    char rotate_90[width][height];
-    if (width >= height){
+    if (width >= height)
+    {
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width - (width - height); x++)
             {
-                *(*rotate_90 + (x * height) + (height - 1 - y)) = *(src + (y * width) + x);
+                *(dest + (x * height) + (height - 1 - y)) = *(src + (y * width) + x);
             }
         }
-        printScreen((char *)rotate_90, width-(width-height) , height);
     }
-    else if (height>width){
-        for (int y = 0; y < height-(height-width); y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                *(*rotate_90 + (x * height) + (height - (height-width) - y)) = *(src + (y * width) + x);
-            }
-        }
-        printScreen((char *)rotate_90, width , height-(height-width));   
-    }
+    // else if (height>width){
+    //     for (int y = 0; y < height-(height-width); y++)
+    //     {
+    //         for (int x = 0; x < width; x++)
+    //         {
+    //             *(*rotate_90 + (x * height) + (height - 1 - y)) = *(src + (y * width) + x);
+    //         }
+    //     }
+    //     printScreen((char *)rotate_90, width , height-(height-width));
+    // }
 }
 
-void rotate18(char *src, int width, int height)
+void rotate18(char *src, char *dest, int width, int height)
 {
-    char rotate_180[height][width];
+
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
-            *(*rotate_180 + (y * width) + x) = *(src + (((height - 1) - y) * width) + ((width - 1) - x));
+            *(dest + (y * width) + x) = *(src + (((height - 1) - y) * width) + ((width - 1) - x));
         }
     }
-    printScreen((char *)rotate_180, width, height);
 }
 
-void rotate27(char *src, int width, int height)
+void rotate27(char *src, char *dest, int width, int height)
 {
-    char rotate_270[height][width];
-    if(width>=height){
+    if (width >= height)
+    {
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width - (width - height); x++)
             {
-                *(*rotate_270 + ((height-1 - x) * height) + y) = *(src + (y * width) + x);
+                *(dest + ((height - 1 - x) * height) + y) = *(src + (y * width) + x);
             }
         }
-        printScreen((char *)rotate_270, width-(width-height) , height);
     }
-    else if(height>width){
-        for (int y = 0; y < height-(height-width); y++)
+    else if (height > width)
+    {
+        for (int y = 0; y < height - (height - width); y++)
         {
             for (int x = 0; x < width; x++)
             {
-                *(*rotate_270 + (height - (height-width) - x) * height + y) = *(src + (y * width) + x);
+                *(dest + (height - (height - width) - x) * height + y) = *(src + (y * width) + x);
             }
         }
-        printScreen((char *)rotate_270, width , height-(height-width));
     }
 }
 
-void invertf(char *src, int width, int height)
+void invertf(char *src, char *dest, int width, int height)
 {
-    char invert[height][width];
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
             if (*(src + (y * width) + x) == '*')
             {
-                *(*invert + (y * width) + x) = '-';
+                *(dest + (y * width) + x) = '-';
             }
             else
             {
-                *(*invert + (y * width) + x) = '*';
+                *(dest + (y * width) + x) = '*';
             }
         }
     }
-    printScreen((char *)invert, width, height);
 }
