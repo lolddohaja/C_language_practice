@@ -195,7 +195,10 @@ void start_game(struct Map current_map)
 
             int next_x = x1 + get_dx(ch);
             int next_y = y1 + get_dy(ch);
-
+            if (((get_dx(ch) == 1 || get_dx(ch) == -1) || (get_dy(ch) == 1 || get_dy(ch) == -1)) && (*(current_map.map + (next_y * current_map.width) + next_x)) != '#')
+            {
+                count++;
+            }
             if (*(current_map.map + ((next_y + 1) * current_map.width) + next_x) == ' ' && (ch == 'a' || ch == 'd'))
             {
                 ch = 0;
@@ -221,10 +224,7 @@ void start_game(struct Map current_map)
             {
                 y1 = next_y;
             }
-            if ((*(current_map.map + (next_y * current_map.width) + next_x)) != '#')
-            {
-                count++;
-            }
+
         }
         usleep(50 * 500);
     } while (1);
