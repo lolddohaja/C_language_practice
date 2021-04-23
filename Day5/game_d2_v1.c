@@ -148,23 +148,73 @@ int get_dy(char ch)
 }
 void map_menu()
 {
-    refresh();
-    mvprintw(0, 0, "----------Select Map----------");
-    mvprintw(1, 0, "----------1. level1-----------");
-    mvprintw(2, 0, "----------2. level2-----------");
-    mvprintw(3, 0, "----------3. level3-----------");
-    mvprintw(4, 0, "----------4. level4-----------");
-    mvprintw(5, 0, "----------5. level5-----------");
-    mvprintw(6, 0, "----------6. level6-----------");
-    refresh();
+    int n = 0;
+    while(1){
+        if (n == 0)
+        {
+            refresh();
+            mvprintw(0, 0,  "■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■");
+            mvprintw(1, 0,  "□                                                               □");
+            mvprintw(2, 0,  "■                         Select  Map                           ■");
+            mvprintw(3, 0,  "□                          1. level1                            □");
+            mvprintw(4, 0,  "■                          2. level2                            ■");
+            mvprintw(5, 0,  "□                          3. level3                            □");
+            mvprintw(6, 0,  "■                          4. level4                            ■");
+            mvprintw(7, 0,  "□                          5. level5                            □");
+            mvprintw(8, 0,  "■                          6. level6                            ■");
+            mvprintw(9, 0,  "□                                                               □");
+            mvprintw(9, 0,  "■                                                               ■");
+            mvprintw(10, 0, "□                             key                               □");
+            mvprintw(11, 0, "■                           ←   : a                             ■");
+            mvprintw(12, 0, "□                           ↑   : w                             □");
+            mvprintw(13, 0, "■                           →   : d                             ■");
+            mvprintw(14, 0, "□                           ↓   : s                             □");
+            mvprintw(15, 0, "■                           exit: q                             ■");
+            mvprintw(16, 0, "□                                                               □");
+            mvprintw(17, 0, "■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■");
+            refresh();
+             usleep(250000);
+            n = !n;
+        }
+        else if(n==1)
+        {
+            refresh();
+            mvprintw(0, 0,  "□ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □");
+            mvprintw(1, 0,  "■                                                               ■");
+            mvprintw(2, 0,  "□                         Select  Map                           □");
+            mvprintw(3, 0,  "■                          1. level1                            ■");
+            mvprintw(4, 0,  "□                          2. level2                            □");
+            mvprintw(5, 0,  "■                          3. level3                            ■");
+            mvprintw(6, 0,  "□                          4. level4                            □");
+            mvprintw(7, 0,  "■                          5. level5                            ■");
+            mvprintw(8, 0,  "□                          6. level6                            □");
+            mvprintw(9, 0,  "■                                                               ■");
+            mvprintw(9, 0,  "□                                                               □");
+            mvprintw(10, 0, "■                             key                               ■");
+            mvprintw(11, 0, "□                           ←   : a                             □");
+            mvprintw(12, 0, "■                           ↑   : w                             ■");
+            mvprintw(13, 0, "□                           →   : d                             □");
+            mvprintw(14, 0, "■                           ↓   : s                             ■");
+            mvprintw(15, 0, "□                           exit: q                             □");
+            mvprintw(16, 0, "■                                                               ■");
+            mvprintw(17, 0, "□ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □ ■ □");
+            refresh();
+            usleep(250000);
+            n = !n;
+        }else{
+            break;
+        }
+    }
+
 }
 
 void finish_game()
 {
+
+    mvprintw(5, 0, "           !!CLEAR!!         ");
     refresh();
-    mvprintw(10, 0, "----------!!CLEAR!!----------");
-    usleep(5000000);
-    refresh();
+    usleep(3000000);
+    clear();
 }
 
 void start_game(struct Map current_map)
@@ -181,10 +231,11 @@ void start_game(struct Map current_map)
 
         *(current_map.map + (y1 * current_map.width) + x1) = '@';
 
-        printMap(current_map, count);
 
+        
         while (kbhit())
         {
+            printMap(current_map, count);
             ch = getchar();
         }
         if (ch)
@@ -196,7 +247,8 @@ void start_game(struct Map current_map)
 
             int next_x = x1 + get_dx(ch);
             int next_y = y1 + get_dy(ch);
-            if (ch == 'q'){
+            if (ch == 'q')
+            {
                 clear();
                 break;
             }
@@ -229,7 +281,8 @@ void start_game(struct Map current_map)
             {
                 y1 = next_y;
             }
-            if ((*(current_map.map + (next_y * current_map.width) + next_x)) == 'G'){
+            if ((*(current_map.map + (next_y * current_map.width) + next_x)) == 'G')
+            {
                 clear();
                 finish_game();
                 break;
@@ -238,8 +291,6 @@ void start_game(struct Map current_map)
         usleep(50 * 500);
     } while (1);
 }
-
-
 
 int main(void)
 {
@@ -266,16 +317,17 @@ int main(void)
     loadMap(&map6, "map6.txt");
 
     int select;
-
+    
     do
     {
         char input = 0;
-        map_menu();
 
         while (kbhit())
         {
             input = getchar();
         }
+        map_menu();
+        
         if (input == '1')
         {
             clear();
@@ -306,7 +358,8 @@ int main(void)
             clear();
             start_game(map6);
         }
-        else{
+        else
+        {
             map_menu();
         }
 
