@@ -148,7 +148,6 @@ int get_dy(char ch)
 }
 void map_menu()
 {
-
     refresh();
     mvprintw(0, 0, "----------Select Map----------");
     mvprintw(1, 0, "----------1. level1-----------");
@@ -157,7 +156,14 @@ void map_menu()
     mvprintw(4, 0, "----------4. level4-----------");
     mvprintw(5, 0, "----------5. level5-----------");
     mvprintw(6, 0, "----------6. level6-----------");
+    refresh();
+}
 
+void finish_game()
+{
+    refresh();
+    mvprintw(10, 0, "----------!!CLEAR!!----------");
+    usleep(5000000);
     refresh();
 }
 
@@ -188,13 +194,12 @@ void start_game(struct Map current_map)
             *(current_map.map + (y1 * current_map.width) + x1) = ' ';
             attroff(COLOR_PAIR(EMPTY_PAIR));
 
+            int next_x = x1 + get_dx(ch);
+            int next_y = y1 + get_dy(ch);
             if (ch == 'q'){
                 clear();
                 break;
             }
-
-            int next_x = x1 + get_dx(ch);
-            int next_y = y1 + get_dy(ch);
             if (((get_dx(ch) == 1 || get_dx(ch) == -1) || (get_dy(ch) == 1 || get_dy(ch) == -1)) && (*(current_map.map + (next_y * current_map.width) + next_x)) != '#')
             {
                 count++;
@@ -224,11 +229,17 @@ void start_game(struct Map current_map)
             {
                 y1 = next_y;
             }
-
+            if ((*(current_map.map + (next_y * current_map.width) + next_x)) == 'G'){
+                clear();
+                finish_game();
+                break;
+            }
         }
         usleep(50 * 500);
     } while (1);
 }
+
+
 
 int main(void)
 {
