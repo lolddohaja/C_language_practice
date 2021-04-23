@@ -54,6 +54,8 @@ int kbhit(void)
 
     return 0;
 }
+
+
 void loadMap(struct Map *selectMap, char *mapName)
 {
 
@@ -164,7 +166,7 @@ void map_menu()
             mvprintw(5, 0, "□                          3. level3                            □");
             mvprintw(6, 0, "■                          4. level4                            ■");
             mvprintw(7, 0, "□                          5. level5                            □");
-            mvprintw(8, 0, "■                          6. level6                            ■");
+            mvprintw(8, 0, "■                          q.  exit                             ■");
             mvprintw(9, 0, "□                                                               □");
             mvprintw(9, 0, "■                                                               ■");
             mvprintw(10, 0, "□                             key                               □");
@@ -190,7 +192,7 @@ void map_menu()
             mvprintw(5, 0, "■                          3. level3                            ■");
             mvprintw(6, 0, "□                          4. level4                            □");
             mvprintw(7, 0, "■                          5. level5                            ■");
-            mvprintw(8, 0, "□                          6. level6                            □");
+            mvprintw(8, 0, "□                          q.  exit                             □");
             mvprintw(9, 0, "■                                                               ■");
             mvprintw(9, 0, "□                                                               □");
             mvprintw(10, 0, "■                             key                               ■");
@@ -318,14 +320,14 @@ int main(void)
     struct Map map3;
     struct Map map4;
     struct Map map5;
-    struct Map map6;
+
 
     loadMap(&map1, "map1.txt");
     loadMap(&map2, "map2.txt");
     loadMap(&map3, "map3.txt");
     loadMap(&map4, "map4.txt");
     loadMap(&map5, "map5.txt");
-    loadMap(&map6, "map6.txt");
+
 
     int select;
 
@@ -362,11 +364,6 @@ int main(void)
         {
             clear();
             start_game(map5);
-        }
-        else if (input == '6')
-        {
-            clear();
-            start_game(map6);
         }
         else if (input == 'q')
         {
