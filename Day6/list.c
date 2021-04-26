@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <assert.h>
 
 #define LIST_LEN 5
 
@@ -8,6 +9,7 @@ int add_to_list(int list[], int len, int idx, int val);
 int delete_from_list(int list[], int len, int next_idx, int idx);
 int update_list(int list[], int len, int next_idx, int idx, int val);
 int insert_to_list(int list[], int len, int next_idx, int idx, int val);
+int is_empty(int list[], int len);
 
 int main()
 {
@@ -31,6 +33,7 @@ int main()
     print_list(list, LIST_LEN, next_idx);
     next_idx = insert_to_list(list, LIST_LEN, next_idx, 2, 45);
     print_list(list, LIST_LEN, next_idx);
+
     return 0;
 }
 
@@ -92,15 +95,47 @@ int insert_to_list(int list[], int len, int next_idx, int idx, int val)
     {
         return next_idx;
     }
-    if(idx == len-1)
+    if (idx == len - 1)
     {
         list[idx] = val;
         return next_idx;
     }
-    for (int i = next_idx ; i >= idx; i--)
+    for (int i = next_idx; i >= idx; i--)
     {
-        list[i+1] = list[i];
+        list[i + 1] = list[i];
     }
     list[idx] = val;
     return next_idx + 1;
+}
+
+int is_empty(int list[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        if (list[i] = !0)
+        {
+            return 0;
+        }
+        else
+            ;
+        {
+            return 1;
+        }
+    }
+}
+
+int is_full(int list[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        if (list[i] = !0)
+        {
+            return 1;
+        }
+        else
+            ;
+        {
+            return 0;
+        }
+    }
 }
