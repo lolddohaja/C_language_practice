@@ -83,6 +83,7 @@ void loadMap(struct Map *selectMap, string mapName)
         }
         fp.close();
     }
+    selectMap->map.push_back(" ");
     
     selectMap->width = selectMap->map[0].size();
     selectMap->height = cnt;
@@ -271,19 +272,31 @@ void start_game(struct Map current_map)
             {
                 count++;
             }
-            if (current_map.map[next_y+1][next_x] == ' ' && (ch == 'a' || ch == 'd'))
+
+            // check stop point
+            int is_move_h =  (ch == 'a' || ch == 'd');
+            int is_move_v =  (ch == 'w' || ch == 's');
+            if(is_move_h) {
+                int up_y = next_y-1;
+                int down_y = next_y+1;
+                if( in_bound(map, next_x, up_y) ) {
+                    char up_block = current_map.map[up_y][next_x];
+                    char down_block = current_map.map[down_y][next_x];
+
+                    if (up_block == ' '  || down_block == ' ' )
+                    {
+                        ch = 0;
+                    }
+
+                }
+            }
+
+
+            if (current_map.map[next_y][next_x+1] == ' ' && is_move_v)
             {
                 ch = 0;
             }
-            if (current_map.map[next_y-1][next_x] == ' ' && (ch == 'a' || ch == 'd'))
-            {
-                ch = 0;
-            }
-            if (current_map.map[next_y][next_x+1] == ' ' && (ch == 'w' || ch == 's'))
-            {
-                ch = 0;
-            }
-            if (current_map.map[next_y][next_x-1] == ' ' && (ch == 'w' || ch == 's'))
+            if (current_map.map[next_y][next_x-1] == ' ' && is_move_v)
             {
                 ch = 0;
             }
@@ -292,15 +305,15 @@ void start_game(struct Map current_map)
             {
                 x1 = next_x;
             }
-            if (next_y > 0 && next_y < current_map.height - 1 && (current_map.map[next_y][next_x]) != '#')
+            if (next_y > 0 && next_y < current_map.height -1 && (current_map.map[next_y][next_x]) != '#')
             {
                 y1 = next_y;
             }
+
             if (current_map.map[next_y][next_x] == 'G')
             {
                 clear();
                 finish_game();
-
                 break;
             }
         }

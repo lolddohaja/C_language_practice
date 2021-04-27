@@ -12,7 +12,11 @@ private:
     int height;
 
 public:
-    void load_map(class clas, char *mapName);
+    void load_map(class clas, char *mapName)
+    {
+        
+    }
     void print_map(class clas, int cnt);
     void start_game(class clas);
 };
+
