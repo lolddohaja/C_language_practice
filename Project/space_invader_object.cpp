@@ -10,7 +10,9 @@ void Player::setPosition(int x_position, int y_position)
 
 int Player::getPosition(int x_position, int y_position, char ch)
 {
-
+    int val = get_dx(ch);
+    int next_x = x_position + val;
+    return position[y_position][next_x];
 }
 
 

@@ -8,11 +8,12 @@ using namespace std;
 class GameObject
 {
 private:
-    vector<string> position;
+    
     int x_position;
     int y_position;
     char *shape;
 public:
+    vector<string> position;
     virtual void setPosition(int x_position,int y_position) = 0;
     virtual int getPosition(int x_position,int y_position) = 0;
     virtual void setShape(char *shape) = 0;
