@@ -279,7 +279,7 @@ void start_game(struct Map current_map)
             if(is_move_h) {
                 int up_y = next_y-1;
                 int down_y = next_y+1;
-                if( in_bound(map, next_x, up_y) ) {
+                //if( in_bound(map, next_x, up_y) ) {
                     char up_block = current_map.map[up_y][next_x];
                     char down_block = current_map.map[down_y][next_x];
 
@@ -288,7 +288,7 @@ void start_game(struct Map current_map)
                         ch = 0;
                     }
 
-                }
+                //}
             }
 
 
