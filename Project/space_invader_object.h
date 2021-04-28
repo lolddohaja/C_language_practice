@@ -13,12 +13,12 @@ private:
     int y_position;
     char *shape;
 public:
-    virtual void setPosition(int x_position,int y_position);
-    virtual int getPosition(int x_position,int y_position);
-    virtual void setShape(char *shape);
-    void setLife(int life);
-    int dead();
-    void setScore(int score);
+    virtual void setPosition(int x_position,int y_position) = 0;
+    virtual int getPosition(int x_position,int y_position) = 0;
+    virtual void setShape(char *shape) = 0;
+    virtual void setLife(int life) = 0;
+    virtual int dead() = 0;
+    virtual void setScore(int score) = 0;
 };
 
 class Player : public GameObject
@@ -27,6 +27,9 @@ private:
     int life;
     int score;
 public:
+    virtual void setPosition(int x_position,int y_position);
+    virtual int getPosition(int x_position,int y_position, char ch);
+    virtual void setShape(char *shape);
     int getScore();
 };
 
@@ -36,6 +39,9 @@ private:
     int life;
     int score;
 public:
+    virtual void setPosition(int x_position,int y_position);
+    virtual int getPosition(int x_position,int y_position);
+    virtual void setShape(char *shape);
     int giveScore();
 
 };

@@ -1,35 +1,18 @@
 #include <iostream>
 #include "space_invader_object.h"
+#include "get_input.h"
 
-void GameObject::setPosition(int x_position,int y_position)
+void Player::setPosition(int x_position, int y_position)
+{
+    int x_pos = x_position;
+    int y_pox = y_position;
+}
+
+int Player::getPosition(int x_position, int y_position, char ch)
 {
 
 }
 
-int GameObject::getPosition(int x_position,int y_position)
-{
-
-}
-
-void GameObject::setShape(char *shape)
-{
-
-}
-
-void GameObject::setLife(int life)
-{
-
-}
-
-int GameObject::dead()
-{
-
-}
-
-void GameObject::setScore(int score)
-{
-
-}
 
 int Player::getScore()
 {
