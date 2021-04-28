@@ -1,20 +1,24 @@
 #ifndef SPACE_INVADER_OBJECT
 #define SPACE_INVADER_OBJECT
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 class GameObject
 {
 private:
+    vector<string> position;
     int x_position;
     int y_position;
     char *shape;
 public:
-    virtual void set_position(int x_position,int y_position);
-    virtual int get_position(int x_position,int y_position);
-    virtual void set_shape(char *shape);
-    void set_life(int life);
+    virtual void setPosition(int x_position,int y_position);
+    virtual int getPosition(int x_position,int y_position);
+    virtual void setShape(char *shape);
+    void setLife(int life);
     int dead();
-    void set_score(int score);
+    void setScore(int score);
 };
 
 class Player : public GameObject
@@ -23,7 +27,7 @@ private:
     int life;
     int score;
 public:
-    int get_score();
+    int getScore();
 };
 
 class Invader : public GameObject
@@ -32,7 +36,7 @@ private:
     int life;
     int score;
 public:
-    int give_score();
+    int giveScore();
 
 };
 

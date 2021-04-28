@@ -1,22 +1,22 @@
 #include <iostream>
 #include "space_invader_object.h"
 
-void GameObject::set_position(int x_position,int y_position)
+void GameObject::setPosition(int x_position,int y_position)
 {
 
 }
 
-int GameObject::get_position(int x_position,int y_position)
+int GameObject::getPosition(int x_position,int y_position)
 {
 
 }
 
-void GameObject::set_shape(char *shape)
+void GameObject::setShape(char *shape)
 {
 
 }
 
-void GameObject::set_life(int life)
+void GameObject::setLife(int life)
 {
 
 }
@@ -26,17 +26,17 @@ int GameObject::dead()
 
 }
 
-void GameObject::set_score(int score)
+void GameObject::setScore(int score)
 {
 
 }
 
-int Player::get_score()
+int Player::getScore()
 {
 
 }
 
-int Invader::give_score()
+int Invader::giveScore()
 {
 
 }
