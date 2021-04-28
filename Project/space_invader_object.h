@@ -1,6 +1,6 @@
-#include <iostream>
 #ifndef SPACE_INVADER_OBJECT
 #define SPACE_INVADER_OBJECT
+#include <iostream>
 
 class GameObject
 {
