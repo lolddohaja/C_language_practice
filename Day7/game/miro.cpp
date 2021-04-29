@@ -218,7 +218,6 @@ void finish_game()
 {
     struct Map temp;
     loadMap(&temp,"clear.txt");
-    mvprintw(0,0,"adasdasd");
     refresh();
     for (int y = 0; y < temp.height; y++)
     {
